@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Desktop\TaxiCoinDev-dima\TokenAPI\TokenAPI.csproj" />
+    <ProjectReference Include="..\TokenAPI\TokenAPI.csproj" />
   </ItemGroup>
 
 </Project>
