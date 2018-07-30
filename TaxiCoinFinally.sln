@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiCoinFinally", "TaxiCoinFinally\TaxiCoinFinally.csproj", "{D99F8B9C-A6E7-4F7B-B65C-835AB8B50632}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenAPI", "..\..\..\Desktop\TaxiCoinDev-dima\TokenAPI\TokenAPI.csproj", "{B4DFF533-7D60-4D54-A9B4-BD173205126C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D99F8B9C-A6E7-4F7B-B65C-835AB8B50632}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D99F8B9C-A6E7-4F7B-B65C-835AB8B50632}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D99F8B9C-A6E7-4F7B-B65C-835AB8B50632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4DFF533-7D60-4D54-A9B4-BD173205126C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4DFF533-7D60-4D54-A9B4-BD173205126C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4DFF533-7D60-4D54-A9B4-BD173205126C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4DFF533-7D60-4D54-A9B4-BD173205126C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
