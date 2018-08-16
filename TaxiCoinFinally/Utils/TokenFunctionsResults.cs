@@ -6,46 +6,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TokenAPI;
+using TaxiCoinFinally.Contexts;
 
 namespace TaxiCoinFinally.Utils
 {
-    public class TokenFunctionsResults<TResult, TPattern> where TPattern : IControllerPattern
+    public class TokenFunctionsResults<TResult>
     {
-        public static TResult InvokeByCall(UInt64 id, TPattern req, string funcName, params object[] funcParametrs)
+        public static TResult InvokeByCall(UInt64 id, User user, string funcName, params object[] funcParametrs)
         {
-            Crypto.DecryptTwoStringsAndGetContractFunctions(out string senderAddress, req.Sender, out string password, req.Password, req.PassPhrase, out ContractFunctions contractFunctions);
+            ContractFunctions contractFunctions=Globals.GetInstance().ContractFunctions;
             var param=new List<object>() { id };
             param.AddRange(funcParametrs);
-            return contractFunctions.CallFunctionByName<TResult>(senderAddress, password, funcName, param.ToArray()).Result;
+            return contractFunctions.CallFunctionByName<TResult>(user.PublicKey, user.PrivateKey, funcName, param.ToArray()).Result;
         }
 
-        public static TResult InvokeByCall(TPattern req, string funcName)
+        public static TResult InvokeByCall(User user, string funcName)
         {
-            Crypto.DecryptTwoStringsAndGetContractFunctions(out string senderAddress, req.Sender, out string password, req.Password, req.PassPhrase, out ContractFunctions contractFunctions);
-
-            return contractFunctions.CallFunctionByName<TResult>(senderAddress, password, funcName, null).Result;
+            ContractFunctions contractFunctions = Globals.GetInstance().ContractFunctions;
+            return contractFunctions.CallFunctionByName<TResult>(user.PublicKey, user.PrivateKey, funcName, null).Result;
         }
 
 
-        public static TransactionReceipt InvokeByTransaction(TPattern req, string funcName,UInt64 Gas, params object[] funcParametrs)
+        public static TransactionReceipt InvokeByTransaction(User user, string funcName,UInt64 Gas, params object[] funcParametrs)
         {
-            Crypto.DecryptTwoStringsAndGetContractFunctions(out string senderAddress, req.Sender, out string password, req.Password, req.PassPhrase, out ContractFunctions contractFunctions);
-
-            return contractFunctions.CallFunctionByNameSendTransaction(senderAddress, password, funcName,Gas, funcParametrs).Result;
+            ContractFunctions contractFunctions = Globals.GetInstance().ContractFunctions;
+            return contractFunctions.CallFunctionByNameSendTransaction(user.PublicKey, user.PrivateKey, funcName,Gas, funcParametrs).Result;
         }
 
-        public static TransactionReceipt InvokeByTransaction(TPattern req, string funcName,UInt64 Value,UInt64 Gas)
+        public static TransactionReceipt InvokeByTransaction(User user, string funcName,UInt64 Value,UInt64 Gas)
         {
-            Crypto.DecryptTwoStringsAndGetContractFunctions(out string senderAddress, req.Sender, out string password, req.Password, req.PassPhrase, out ContractFunctions contractFunctions);
-
-            return contractFunctions.CallFunctionByNameSendTransaction(senderAddress, password, funcName,Value:Value,Gas:Gas,parametrsOfFunction:null).Result;
+            ContractFunctions contractFunctions = Globals.GetInstance().ContractFunctions;
+            return contractFunctions.CallFunctionByNameSendTransaction(user.PublicKey, user.PrivateKey, funcName,Value:Value,Gas:Gas,parametrsOfFunction:null).Result;
         }
 
-        public static TransactionReceipt InvokeByTransaction(TPattern req, string funcName,ulong Gas)
+        public static TransactionReceipt InvokeByTransaction(User user, string funcName,ulong Gas)
         {
-            Crypto.DecryptTwoStringsAndGetContractFunctions(out string senderAddress, req.Sender, out string password, req.Password, req.PassPhrase, out ContractFunctions contractFunctions);
-
-            return contractFunctions.CallFunctionByNameSendTransaction(senderAddress, password, funcName,Gas, null).Result;
+            ContractFunctions contractFunctions = Globals.GetInstance().ContractFunctions;
+            return contractFunctions.CallFunctionByNameSendTransaction(user.PublicKey, user.PrivateKey, funcName,Gas, null).Result;
         }
     }
 }

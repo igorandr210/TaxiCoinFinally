@@ -6,6 +6,5 @@ using System.Threading.Tasks;
 
 namespace TokenAPI
 {
-
     public enum PaymentStatus : int { Pending, Completed, Refunded, GetByDriver }
 }

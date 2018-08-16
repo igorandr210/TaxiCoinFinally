@@ -18,6 +18,7 @@ namespace TokenAPI
 
         public ContractFunctions(string abi, string byteCode)
         {
+           
             Abi = abi;
             ByteCode = byteCode;
         }
@@ -98,7 +99,7 @@ namespace TokenAPI
         private Web3 GetWeb3Account(string senderAddress, string password)
         {
             var account = new Account(password);
-            return new Web3(account,"http://127.0.0.1:8545");
+            return new Web3(account, "https://kovan.infura.io/wEt3RDye41RKD5g4XKNS");
         }
     }
 }

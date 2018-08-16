@@ -6,20 +6,30 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using TokenAPI;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using TaxiCoinFinally.Contexts;
+using Microsoft.AspNetCore.Identity;
 
 namespace TaxiCoinFinally.Controllers
 {
-    public class DeployController : Controller
+    
+    public class DeployController : UserController
     {
-        [Route("api/deploy")]
-        [HttpPost]
-        public async Task<JsonResult> Post([FromForm] DeployControllerPattern req)
+        public DeployController(UserManager<User> userManager) : base(userManager)
         {
+        }
+
+        [HttpPost,Authorize,Route("api/deploy")]
+        public async Task<JsonResult> Post([FromForm] DefaultControllerPattern req)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var email = user.Email;
             object contractReceipt;
-            Crypto.DecryptTwoStringsAndGetContractFunctions(out string senderAddress, req.Sender, out string password, req.Password, req.PassPhrase, out ContractFunctions contractFunctions);
+            ContractFunctions contractFunctions;
             try
             {
-                contractReceipt=await contractFunctions.DeployContract(senderAddress, password, req.Gas);
+                contractFunctions = Globals.GetInstance().ContractFunctions;
+                contractReceipt =await contractFunctions.DeployContract(user.PublicKey,user.PrivateKey, req.Gas);
             }
             catch (Exception e)
             {
@@ -28,8 +38,8 @@ namespace TaxiCoinFinally.Controllers
 
             return Json(contractReceipt);
         }
-        [Route("api/deploy/fromaddress")]
-        [HttpPost]
+        
+        [HttpPost,Authorize(Roles ="Admin"),Route("api/deploy/fromaddress")]
         public JsonResult GetApiFromContractAddress([FromForm] DeployControllerPattern req)
         {
             Globals.GetInstance().ContractFunctions.ContractAddress=req.Address;

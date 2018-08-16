@@ -6,18 +6,25 @@ using System.Net;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using TokenAPI;
+using Microsoft.AspNetCore.Identity;
+using TaxiCoinFinally.Contexts;
 
 namespace TaxiCoinFinally.Controllers
 {
-    public class OrderController : Controller
+    public class OrderController : UserController
     {
+        public OrderController(UserManager<User> userManager) : base(userManager)
+        {
+        }
+
         [HttpPost]
         public JsonResult GetOrder(UInt64 id, [FromForm] DefaultControllerPattern req)
         {
+            var user = _userManager.GetUserAsync(HttpContext.User).Result;
             TransactionReceipt result;
             try
             {
-                result = TokenFunctionsResults<TransactionReceipt,DefaultControllerPattern>.InvokeByTransaction( req, FunctionNames.GetOrder,req.Gas,funcParametrs:id);
+                result = TokenFunctionsResults<TransactionReceipt>.InvokeByTransaction( user, FunctionNames.GetOrder,req.Gas,funcParametrs:id);
             }
             catch (Exception e)
             {
@@ -30,10 +37,11 @@ namespace TaxiCoinFinally.Controllers
         [HttpPost]
         public JsonResult CompleteOrder(UInt64 id, [FromForm] DefaultControllerPattern req)
         {
+            var user =  _userManager.GetUserAsync(HttpContext.User).Result;
             TransactionReceipt result;
             try
             {
-                result = TokenFunctionsResults<int, DefaultControllerPattern>.InvokeByTransaction(req, FunctionNames.CompleteOrder,req.Gas,funcParametrs:id);
+                result = TokenFunctionsResults<int>.InvokeByTransaction(user, FunctionNames.CompleteOrder,req.Gas,funcParametrs:id);
             }
             catch (Exception e)
             {

@@ -6,18 +6,25 @@ using System.Net;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using TokenAPI;
+using Microsoft.AspNetCore.Identity;
+using TaxiCoinFinally.Contexts;
 
 namespace TaxiCoinFinally.Controllers
 {
-    public class DepositController : Controller
+    public class DepositController : UserController
     {
+        public DepositController(UserManager<User> userManager) : base(userManager)
+        {
+        }
+
         [HttpPost]
         public JsonResult Post([FromForm] DepositPattern req)
         {
+            var user = _userManager.GetUserAsync(HttpContext.User).Result;
             TransactionReceipt result;
             try
             {
-                result = TokenFunctionsResults<UInt64, DepositPattern>.InvokeByTransaction(req, FunctionNames.Deposit, Value: req.Value, Gas: req.Gas);
+                result = TokenFunctionsResults<UInt64>.InvokeByTransaction(user, FunctionNames.Deposit, Value: req.Value, Gas: req.Gas);
             }
             catch (Exception e)
             {

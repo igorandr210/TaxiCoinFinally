@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiCoinFinally", "TaxiCoinFinally\TaxiCoinFinally.csproj", "{D99F8B9C-A6E7-4F7B-B65C-835AB8B50632}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxiCoinFinally", "TaxiCoinFinally\TaxiCoinFinally.csproj", "{D99F8B9C-A6E7-4F7B-B65C-835AB8B50632}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenAPI", "TokenAPI\TokenAPI.csproj", "{B4DFF533-7D60-4D54-A9B4-BD173205126C}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8036D407-08AA-44B8-BA1E-BA335F576EE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenAPI", "TokenAPI\TokenAPI.csproj", "{C2AD09C5-685D-41D2-BB88-EECF1FDD18D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,14 @@ Global
 		{D99F8B9C-A6E7-4F7B-B65C-835AB8B50632}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D99F8B9C-A6E7-4F7B-B65C-835AB8B50632}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D99F8B9C-A6E7-4F7B-B65C-835AB8B50632}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4DFF533-7D60-4D54-A9B4-BD173205126C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4DFF533-7D60-4D54-A9B4-BD173205126C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4DFF533-7D60-4D54-A9B4-BD173205126C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4DFF533-7D60-4D54-A9B4-BD173205126C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8036D407-08AA-44B8-BA1E-BA335F576EE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8036D407-08AA-44B8-BA1E-BA335F576EE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8036D407-08AA-44B8-BA1E-BA335F576EE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8036D407-08AA-44B8-BA1E-BA335F576EE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2AD09C5-685D-41D2-BB88-EECF1FDD18D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2AD09C5-685D-41D2-BB88-EECF1FDD18D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2AD09C5-685D-41D2-BB88-EECF1FDD18D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2AD09C5-685D-41D2-BB88-EECF1FDD18D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,20 +6,28 @@ using System.Net.Http;
 using TokenAPI;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using TaxiCoinFinally.Contexts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TaxiCoinFinally.Controllers
 {
-    public class BalanceController : Controller
+    public class BalanceController : UserController
     {
-        [HttpPost]
-        public async Task<string> Post([FromForm] DefaultControllerPattern req)
+        public BalanceController(UserManager<User> userManager) : base(userManager)
         {
-            Crypto.DecryptTwoStringsAndGetContractFunctions(out string senderAddress, req.Sender, out string password, req.Password, req.PassPhrase, out ContractFunctions contractFunctions);
-            ulong res = 0;
+        }
+
+        [HttpGet,Authorize,Route("api/[controller]")]
+        public async Task<string> Get()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            ulong res;
+            var contractFunctions = Globals.GetInstance().ContractFunctions;
 
             try
             {
-                res =await contractFunctions.CallFunctionByName<System.UInt64>(senderAddress, password, FunctionNames.Balance, senderAddress);
+                res =await contractFunctions.CallFunctionByName<System.UInt64>(user.PublicKey, user.PrivateKey, FunctionNames.Balance, user.PublicKey);
             }
             catch (Exception e)
             {
