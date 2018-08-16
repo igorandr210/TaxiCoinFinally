@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using TokenAPI;
 using Microsoft.AspNetCore.Identity;
 using TaxiCoinFinally.Contexts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TaxiCoinFinally.Controllers
 {
@@ -17,7 +18,7 @@ namespace TaxiCoinFinally.Controllers
         {
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public JsonResult Post([FromForm] DepositPattern req)
         {
             var user = _userManager.GetUserAsync(HttpContext.User).Result;

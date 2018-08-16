@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using TokenAPI;
 using Microsoft.AspNetCore.Identity;
 using TaxiCoinFinally.Contexts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TaxiCoinFinally.Controllers
 {
@@ -17,7 +18,7 @@ namespace TaxiCoinFinally.Controllers
         {
         }
 
-        [HttpPost]
+        [HttpPost,Authorize]
         public JsonResult Create(UInt64 id, [FromForm] DefaultControllerPattern req)
         {
             var user = _userManager.GetUserAsync(HttpContext.User).Result;
@@ -34,7 +35,7 @@ namespace TaxiCoinFinally.Controllers
             return Json(result);
         }
 
-        [HttpPost]
+        [HttpPost,Authorize(Roles ="Admin")]
         public JsonResult Approve(UInt64 id, [FromForm] DefaultControllerPattern req)
         {
             var user = _userManager.GetUserAsync(HttpContext.User).Result;
@@ -51,7 +52,7 @@ namespace TaxiCoinFinally.Controllers
             return Json(result);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         public JsonResult DisApprove(UInt64 id, [FromForm] DefaultControllerPattern req)
         {
             var user = _userManager.GetUserAsync(HttpContext.User).Result;

@@ -19,11 +19,10 @@ namespace TaxiCoinFinally.Controllers
         {
         }
 
-        [HttpPost,Authorize,Route("api/deploy")]
+        [HttpPost,Authorize(Roles ="Admin"),Route("api/deploy")]
         public async Task<JsonResult> Post([FromForm] DefaultControllerPattern req)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            var email = user.Email;
             object contractReceipt;
             ContractFunctions contractFunctions;
             try

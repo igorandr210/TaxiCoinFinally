@@ -36,7 +36,7 @@ namespace TaxiCoinFinally.Controllers
 
             return Json(res);
         }
-        [HttpPost]
+        [HttpPost,Authorize]
         public JsonResult Create(UInt64 id, [FromForm] CreatePaymentPattern req)
         {
             var user = _userManager.GetUserAsync(HttpContext.User).Result;
