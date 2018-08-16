@@ -1,0 +1,24 @@
+version: '3.4'
+services:
+  db:  
+     image: postgres 
+     ports: 
+      - "5432:5432"
+     environment:  
+        POSTGRES_USER: 'admin' 
+        POSTGRES_PASSWORD: 1515 
+        POSTGRES_DB: taxi 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8090:8080
+  taxicoinfinally:
+    image: ${DOCKER_REGISTRY}taxicoinfinally
+    ports:
+     - 80:80
+    build:
+      context: .
+      dockerfile: TaxiCoinFinally/Dockerfile
+  
+ 
