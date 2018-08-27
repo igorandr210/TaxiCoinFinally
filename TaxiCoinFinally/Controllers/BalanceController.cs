@@ -35,5 +35,23 @@ namespace TaxiCoinFinally.Controllers
             }
             return res.ToString();
         }
+
+        [HttpGet, Authorize]
+        public async Task<string> GetEthereumBalance()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var contractFunctions = Globals.GetInstance().ContractFunctions;
+            string res;
+
+            try
+            {
+                res = await contractFunctions.GetUserBalance(user.PublicKey, user.PrivateKey);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+            return res;
+        }
     }
 }
